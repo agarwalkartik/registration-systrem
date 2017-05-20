@@ -14,13 +14,16 @@ class DatabaseSeeder extends Seeder
     {
         Model::unguard();
 
-        $this->call('ProductionSeeder');
 
         // Example of how to call a seeder script for a given environment.
-//        if( App::environment() === 'development' )
-//        {
-//            $this->call('DevelopmentSeeder');
-//        }
+       if( App::environment() === 'development' )
+       {
+           $this->call('DevelopmentSeeder');
+       }
+       if( App::environment() === 'production' )
+       {
+            $this->call('ProductionSeeder');
+       }
 
         Model::reguard();
     }

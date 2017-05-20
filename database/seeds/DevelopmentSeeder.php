@@ -16,7 +16,11 @@ class DevelopmentSeeder extends Seeder
      */
     public function run()
     {
-
+        for($i = 1; $i <= 100; $i++ )
+           DB::table('students')->insert([
+            'aadhar_card_number' => $i,
+            'university_roll_number' => str_random(10)
+        ]);
         // Add migration code for the development environment.
 
     }
