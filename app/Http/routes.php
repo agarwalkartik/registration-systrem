@@ -159,16 +159,19 @@ Route::group(['middleware' => 'authorize'], function () {
     }); // End of ADMIN group
 
 
-    // Student Routes
-      Route::group(['prefix' => 'student'], function () {
-        // Registration routes
-        Route::get(   'registration',                      ['as' => 'student.registration',              'uses' => 'StudentController@registration']);
-        Route::post(  'registration/post',                 ['as' => 'student.registration.post',         'uses' => 'StudentController@registrationPost']);
 
-    }); // End of STUDENT group
 
     // Uncomment to enable Rapyd datagrid.
 //    require __DIR__.'/rapyd.php';
 
 }); // end of AUTHORIZE middleware group
+
+    // Student Routes
+      Route::group(['prefix' => 'student'], function () {
+        // Registration routes
+        Route::get(  'registration',                      ['as' => 'student.registration',              'uses' => 'StudentController@registration']);
+        Route::get(  'registration/aadhaar-card/',                      ['as' => 'student.registration.aadhaar-card',              'uses' => 'StudentController@registrationAadhaarCard']);
+        Route::post(  'registration/post-aadhaar-card',                 ['as' => 'student.registration.post-aadhaar-card',         'uses' => 'StudentController@aadhaarCardPost']);
+
+    }); // End of STUDENT group
 
