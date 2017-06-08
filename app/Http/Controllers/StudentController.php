@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Redirect;
 use Setting;
 use Validator;
+use App\Models\Student;
 
 
 class StudentController extends Controller
@@ -25,7 +26,7 @@ class StudentController extends Controller
      protected function aadhaarCardvalidator(array $data)
     {
         return Validator::make($data, [
-            'aadhaar_card_number' => 'required',
+            'aadhaar_card_number' => 'exists:students',
         ]);
     }
 
@@ -48,19 +49,60 @@ class StudentController extends Controller
     public function aadhaarCardPost(Request $request)
     {
 
-        $aadharCardNumber = '';
-        if ($request->has('aadhar-card-number')) {
-            $aadharCardNumber = $request['aadhar-card-number'];
+        $page_title = trans('Student Registartion');
+        $page_description = "Welcome to student registration page";
+        $aadhaarCardNumber = null;
+        if ($request->has('aadhaar_card_number')) {
+            $aadhaarCardNumber = $request['aadhaar_card_number'];
         }
-        echo($aadharCardNumber);
         $validator = $this->aadhaarCardValidator($request->all());
+         if ($validator->fails()) {
+            $this->throwValidationException(
+                $request, $validator
+            );
+        }
+        $validator->after(function ($validator) use ($aadhaarCardNumber) {
+        
+        $studentDetails = Student::where(Student::AADHAAR_CARD_NUMBER,$aadhaarCardNumber)->get()->first();
 
+            if ($studentDetails->registration_status) {
+                $validator->errors()->add('Aadhaar Card Number', 'This Aadhaar Card Number is already registered');
+            }
+        });
         if ($validator->fails()) {
             $this->throwValidationException(
                 $request, $validator
             );
         }
-        return "<h1></h1>";
+        $studentDetails = Student::where(Student::AADHAAR_CARD_NUMBER,$aadhaarCardNumber)->get()->first();
+        return view('student.registration.other-details', compact('studentDetails','page_title', 'page_description'));
 
+    }
+
+    public function otherDetailsPost(Request $request)
+    {
+              $page_title = trans('Student Registartion');
+        $page_description = "Welcome to student registration page";
+        $student = Student::where(Student::AADHAAR_CARD_NUMBER,$request[Student::AADHAAR_CARD_NUMBER])
+        ->update(
+            [
+                Student::STUDENT_MOBILE_NUMBER=>$request[Student::STUDENT_MOBILE_NUMBER],
+             
+                Student::STUDENT_LOCAL_ADDRESS=>$request[Student::STUDENT_LOCAL_ADDRESS],
+                Student::STUDENT_LOCAL_ADDRESS_DISTRICT=>$request[Student::STUDENT_LOCAL_ADDRESS_DISTRICT],
+                Student::STUDENT_LOCAL_ADDRESS_STATE=>$request[Student::STUDENT_LOCAL_ADDRESS_STATE],
+                Student::STUDENT_LOCAL_ADDRESS_PIN_CODE=>$request[Student::STUDENT_LOCAL_ADDRESS_PIN_CODE],
+                Student::STUDENT_LOCAL_ADDRESS_PHONE_NUMBER=>$request[Student::STUDENT_LOCAL_ADDRESS_PHONE_NUMBER],
+
+                Student::FEE_RECEIPT_NUMBER=>$request[Student::FEE_RECEIPT_NUMBER],
+                Student::FEE_RECEIPT_DATE=>$request[Student::FEE_RECEIPT_DATE],
+                Student::AMOUNT_DEPOSITED=>$request[Student::AMOUNT_DEPOSITED],
+
+                Student::REGISTRATION_STATUS=>Student::REGISTRATION_STATUS_PENDING
+            ]
+            
+            );
+        return view('student.registration.completed',compact('page_title', 'page_description'));
+            
     }
 }

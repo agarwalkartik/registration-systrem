@@ -34,11 +34,12 @@
     @include('partials._errors')
 </div>
 
-<div class="login-box">
+<div >
     <div class="login-logo">
-        <b>{{ $page_title or "Page Title" }}</b> 
+               <b>{{ $page_title or "Page Title" }}</b> 
+
     </div><!-- /.login-logo -->
-    <div class="login-box-body">
+    <div class="">
 
         <!-- Your Page Content Here -->
         @yield('content')

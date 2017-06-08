@@ -19,6 +19,7 @@ class DatabaseSeeder extends Seeder
        if( App::environment() === 'development' )
        {
            $this->call('DevelopmentSeeder');
+            $this->call('ProductionSeeder');
        }
        if( App::environment() === 'production' )
        {
