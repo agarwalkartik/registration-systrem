@@ -24,7 +24,25 @@ class DevelopmentSeeder extends Seeder
             'created_at' => time(),
             'updated_at' => time()
         ]);
-        // Add migration code for the development environment.
 
+        // Create role: registrar
+        // Assign permission basic-authenticated
+        $roleRegistrar = Role::create([
+            "name"          => "registrar",
+            "display_name"  => "Registrar",
+            "description"   => "Registrar Depertment Users",
+            "enabled"       => true
+        ]);
+
+        $userRegistrar = User::create([
+            "first_name"    => "Registrar",
+            "last_name"     => "KEC",
+            "username"      => "registrar.kec",
+            "email"         => "registrar@kec.edu",
+            "password"      => "password",
+            "auth_type"     => "internal",
+            "enabled"       => true
+        ]);
+        $userRegistrar->roles()->attach($roleRegistrar->id);
     }
 }
