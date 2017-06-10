@@ -364,7 +364,7 @@ class ProductionSeeder extends Seeder
         ////////////////////////////////////
         // Create menu: root
         $menuRoot = Menu::create([
-//            'id'            => 0,                   // Hard-coded
+           'id'            => 0,                   // Hard-coded
             'name'          => 'root',
             'label'         => 'Root',
             'position'      => 0,
@@ -381,6 +381,7 @@ class ProductionSeeder extends Seeder
         $menuRoot->save();
         // Create Home menu
         $menuHome = Menu::create([
+            'id'           => 1, // hardcoded
             'name'          => 'home',
             'label'         => 'Home',
             'position'      => 0,

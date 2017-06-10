@@ -18,8 +18,8 @@ class DatabaseSeeder extends Seeder
         // Example of how to call a seeder script for a given environment.
        if( App::environment() === 'development' )
        {
-           $this->call('DevelopmentSeeder');
             $this->call('ProductionSeeder');
+           $this->call('DevelopmentSeeder');
        }
        if( App::environment() === 'production' )
        {

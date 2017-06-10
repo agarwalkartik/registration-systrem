@@ -44,6 +44,7 @@ const REGISTRATION_STATUS = 'registration_status';
 
 const REGISTRATION_STATUS_PENDING = 'pending';
 const REGISTRATION_STATUS_APPROVED = 'approved';
+const REGISTRATION_STATUS_NOT_SUBMITTED = 'not-submitted';
     /**
      * @var array
      */

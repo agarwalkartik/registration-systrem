@@ -74,7 +74,7 @@ class StudentController extends Controller
         
         $studentDetails = Student::where(Student::AADHAAR_CARD_NUMBER,$aadhaarCardNumber)->get()->first();
 
-            if ($studentDetails->registration_status) {
+            if ($studentDetails->registration_status !== Student::REGISTRATION_STATUS_NOT_SUBMITTED) {
                 $validator->errors()->add('Aadhaar Card Number', 'This Aadhaar Card Number is already registered');
             }
         });
