@@ -180,6 +180,10 @@ Route::group(['middleware' => 'authorize'], function () {
     Route::group(['prefix' => 'registrar'], function () {
         // Registration routes
         Route::get(  'students',                      ['as' => 'verify.students',              'uses' => 'RegistrarController@verifyStudents']);
+        Route::any(  'students/edit/',                      ['as' => 'edit.students',              'uses' => 'RegistrarController@editStudents']);
+        // Route::post(  'students/edit/',                      ['as' => 'edit.students.post',              'uses' => 'RegistrarController@editStudents']);
+        // Route::put(  'students/edit/',                      ['as' => 'edit.students.post',              'uses' => 'RegistrarController@editStudents']);
+        // Route::delete(  'students/edit/',                      ['as' => 'edit.students.post',              'uses' => 'RegistrarController@editStudents']);
         Route::get(  'registration/aadhaar-card/',                      ['as' => 'student.registration.aadhaar-card',              'uses' => 'StudentController@registrationAadhaarCard']);
         Route::post(  'registration/post-aadhaar-card',                 ['as' => 'student.registration.post-aadhaar-card',         'uses' => 'StudentController@aadhaarCardPost']);
         Route::post(  'registration/post-other-details',                 ['as' => 'student.registration.post-other-details',         'uses' => 'StudentController@otherDetailsPost']);

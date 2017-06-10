@@ -13,7 +13,8 @@ class CreateStudentsTable extends Migration
     public function up()
     {
         Schema::create('students', function (Blueprint $table) {
-            $table->string(Student::AADHAAR_CARD_NUMBER)->primary();
+            $table->increments('id');
+            $table->string(Student::AADHAAR_CARD_NUMBER)->unique();
             $table->string(Student::UNIVERSITY_ROLL_NUMBER)->unique();;
             $table->string(Student::COURSE_BRANCH)->nullable();
             $table->string(Student::SESSION)->nullable();

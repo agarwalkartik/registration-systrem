@@ -74,4 +74,17 @@ class RegistrarController extends Controller
    return view('registrar.verify-students', compact('filter','grid'));
         // return view('registrar.verify-students', compact('students'));
      }
+
+     public function editStudents(){
+        $edit = \DataEdit::source(new Student);
+        // $student = Student::where(Student::AADHAAR_CARD_NUMBER,'1')->get();
+        // print_r($student);
+         $edit->add(Student::STUDENT_NAME,'Name', 'text'); //field name, label, type
+         $edit->add(Student::FEE_RECEIPT_NUMBER,'Fee Receipt Number', 'number'); //field name, label, type
+         $edit->add(Student::FEE_RECEIPT_DATE,'Fee Receipt Date', 'date'); //field name, label, type
+         $edit->add(Student::AMOUNT_DEPOSITED,'Amount Deposited', 'number'); //field name, label, type
+          $edit->add(Student::REGISTRATION_STATUS,'Registration Status','radiogroup')
+->option(Student::REGISTRATION_STATUS_PENDING,'Pending')->option(Student::REGISTRATION_STATUS_APPROVED,'Approved');
+         return view('registrar.edit-students', compact('edit'));
+     }
 }

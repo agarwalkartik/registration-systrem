@@ -85,7 +85,7 @@ const REGISTRATION_STATUS_NOT_SUBMITTED = 'not-submitted';
         self::REGISTRATION_STATUS
     ];
 
-    public $incrementing = false;
+    public $incrementing = true;
 
-    protected $primary_key = self::AADHAAR_CARD_NUMBER;
+    // protected $primary_key = self::AADHAAR_CARD_NUMBER;
 }
