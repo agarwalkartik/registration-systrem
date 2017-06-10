@@ -23,10 +23,19 @@ class StudentController extends Controller
         session(['crumbtrail.leaf' => 'home']);
     }
 
-     protected function aadhaarCardvalidator(array $data)
+     protected function aadhaarCardValidator(array $data)
     {
         return Validator::make($data, [
             'aadhaar_card_number' => 'exists:students',
+        ]);
+    }
+
+     protected function otherDetailsValidator(array $data)
+    {
+        return Validator::make($data, [
+            Student::FEE_RECEIPT_NUMBER => 'required|numeric',
+            Student::FEE_RECEIPT_DATE => 'required|date',
+            Student::AMOUNT_DEPOSITED => 'required|numeric'
         ]);
     }
 
@@ -83,6 +92,13 @@ class StudentController extends Controller
     {
               $page_title = trans('Student Registartion');
         $page_description = "Welcome to student registration page";
+          $validator = $this->otherDetailsValidator($request->all());
+         if ($validator->fails()) {
+             echo("Validation faild");
+                  return redirect('student/registration/aadhaar-card')
+                        ->withErrors($validator)
+                        ->withInput();
+        }
         $student = Student::where(Student::AADHAAR_CARD_NUMBER,$request[Student::AADHAAR_CARD_NUMBER])
         ->update(
             [

@@ -44,15 +44,15 @@
                 <div class="row">
                 <div class="form-group col-md-4">
                   <label for="fee_receipt_number">Fee Receipt Number</label>
-                  <input type="number" class="form-control" name="fee_receipt_number" id="fee_receipt_number" placeholder="Fee Receipt Number">
+                  <input required type="number" class="form-control" name="fee_receipt_number" id="fee_receipt_number" placeholder="Fee Receipt Number">
                 </div>
                 <div class="form-group col-md-4">
                   <label for="fee_receipt_date">Fee Receipt Date</label>
-                  <input type="date" class="form-control" name="fee_receipt_date" id="fee_receipt_date" placeholder="Fee Receipt Date">
+                  <input required type="date" class="form-control" name="fee_receipt_date" id="fee_receipt_date" placeholder="Fee Receipt Date">
                 </div>
                  <div class="form-group col-md-4">
-                  <label for="fee_receipt_amount">Fee Receipt Amount (Rs.)</label>
-                  <input type="number" class="form-control" name="fee_receipt_amount" id="fee_receipt_amount" placeholder="Fee Receipt Date (Rs.)">
+                  <label for="amount_deposited">Amount Deposited (Rs.)</label>
+                  <input required type="number" class="form-control" name="amount_deposited" id="amount_deposited" placeholder="Amount Deposited  (Rs.)">
                 </div>
                 </div>
                 <div class="box-footer">
