@@ -19,7 +19,7 @@ class DevelopmentSeeder extends Seeder
         for($i = 1; $i <= 500; $i++ )
            DB::table('students')->insert([
             Student::AADHAAR_CARD_NUMBER => $i,
-            Student::UNIVERSITY_ROLL_NUMBER => rand(111111,999999),
+            Student::UNIVERSITY_ROLL_NUMBER => rand(111111,999999999),
             Student::REGISTRATION_STATUS => Student::REGISTRATION_STATUS_NOT_SUBMITTED,
             Student::STUDENT_NAME => str_random(5),
             Student::FATHER_NAME => str_random(5),
